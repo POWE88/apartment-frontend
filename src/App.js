@@ -4,8 +4,9 @@ import Header from './component/header'
 
 import AuthService from './services'
 import Register from './pages/Register'
-import ProtectedExample from './pages/ProtectedExample'
-import PublicExample from './pages/PublicExample'
+import NewApartment from './pages/NewApartment'
+import Apartments from './pages/Apartments'
+import ShowApartment from './page/ShowApartment'
 import Login from './pages/Login'
 
 class App extends Component {
@@ -20,15 +21,17 @@ class App extends Component {
 					// if logged in
 					? <Switch>
 						<Route path="/login" component={Login} />
-						<Route path="/public" component={PublicExample} />
-						<Route path="/protected" component={ProtectedExample} />
+            <Route path="/apartments" component={Apartments} />
+						<Redirect from="/newApartments" component={NewAparment}
+            <Route path="/showapartment" component={ShowApartment}/>
 						<Route path="/register" component={Register} />
 					</Switch>
 					// if not logged in (ie Guest User)
 					: <Switch>
 						<Route path="/login" component={Login} />
-						<Route path="/public" component={PublicExample} />
-						<Redirect from="/protected" to="/register" />
+						<Route path="/apartments" component={Apartments} />
+						<Redirect from="/newApartments" to="/register" />
+            <Route path="/showapartment" component={ShowApartment}/>
 						<Route path="/register" component={Register} />
 					</Switch>}
 				</Router>
