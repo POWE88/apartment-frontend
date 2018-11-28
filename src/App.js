@@ -22,7 +22,7 @@ class App extends Component {
 					? <Switch>
 						<Route path="/login" component={Login} />
             <Route path="/apartments" component={Apartments} />
-						<Redirect from="/newApartments" component={NewApartment}/>
+						<Route path="/newapartment" component={NewApartment}/>
             <Route path="/showapartment" component={ShowApartment}/>
 						<Route path="/register" component={Register} />
 					</Switch>
@@ -30,7 +30,7 @@ class App extends Component {
 					: <Switch>
 						<Route path="/login" component={Login} />
 						<Route path="/apartments" component={Apartments} />
-						<Redirect from="/newApartments" to="/register" />
+						<Redirect from="/newapartment" to="/register" />
             <Route path="/showapartment" component={ShowApartment}/>
 						<Route path="/register" component={Register} />
 					</Switch>}

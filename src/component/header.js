@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Form, FormGroup, FormControl, Buttom} from 'react-bootstrap'
+import {Button, Navbar, Nav, NavItem, MenuItem, NavDropdown } from 'react-bootstrap'
 import AuthService from '../services'
 
 class Header extends Component {
@@ -10,10 +10,23 @@ class Header extends Component {
   }
     render() {
       return(
-        <header>
-          <button onClick={this.handleClick}>Logout</button>
-          
-        </header>
+
+        <Navbar>
+  <Navbar.Header>
+    <Navbar.Brand>
+      <a href="#home">That Damn Apartment</a>
+    </Navbar.Brand>
+  </Navbar.Header>
+  <Nav>
+    <NavItem eventKey={1} href="#">
+      Link
+    </NavItem>
+    <NavItem eventKey={2} href="#">
+      <button onClick={this.handleClick}>Logout</button>
+    </NavItem>
+  </Nav>
+</Navbar>
+
       )
     }
 
