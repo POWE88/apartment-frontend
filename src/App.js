@@ -6,7 +6,7 @@ import AuthService from './services'
 import Register from './pages/Register'
 import NewApartment from './pages/NewApartment'
 import Apartments from './pages/Apartments'
-import ShowApartment from './page/ShowApartment'
+import ShowApartment from './pages/ShowApartment'
 import Login from './pages/Login'
 
 class App extends Component {
@@ -22,7 +22,7 @@ class App extends Component {
 					? <Switch>
 						<Route path="/login" component={Login} />
             <Route path="/apartments" component={Apartments} />
-						<Redirect from="/newApartments" component={NewAparment}
+						<Redirect from="/newApartments" component={NewApartment}/>
             <Route path="/showapartment" component={ShowApartment}/>
 						<Route path="/register" component={Register} />
 					</Switch>
