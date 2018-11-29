@@ -39,6 +39,7 @@ class Login extends Component {
               </form>
               {this.state.loginSuccess && <Redirect to="/" />}
             </div>
+            <p>If you don't have a login, please register <a href='/register'>here</a>.</p>
           </div>
       )
   }

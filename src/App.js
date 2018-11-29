@@ -31,18 +31,18 @@ class App extends Component {
 					// if logged in
 					? <Switch>
 						<Route path="/login" render={(props) => <Login checkLogin={this.checkLoginStatus}/>} />
+            <Route path="/apartments/:id" component={ShowApartment}/>
             <Route path="/apartments/new" component={NewApartment}/>
             <Route path="/apartments" component={Apartments} />
-            <Route path="/showapartment" component={ShowApartment}/>
 						<Route path="/register" component={Register} />
             <Route path="/" component={Apartments} />
 					</Switch>
 					// if not logged in (ie Guest User)
 					: <Switch>
 						<Route path="/login" render={(props) => <Login checkLogin={this.checkLoginStatus}/>} />
+            <Route path="/apartments/:id" component={ShowApartment}/>
             <Redirect from="/apartments/new" to="/register" />
 						<Route path="/apartments" component={Apartments} />
-            <Route path="/showapartment" component={ShowApartment}/>
 						<Route path="/register" component={Register} />
             <Route path="/" component={Apartments} />
 					</Switch>}

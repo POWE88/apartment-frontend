@@ -21,12 +21,12 @@ class Header extends Component {
             <NavItem eventKey={1} href="/">
               Home
             </NavItem>
-            <NavItem eventKey={2} href="/register">
+            {!this.auth.loggedIn() && <NavItem eventKey={2} href="/register">
               Register
-            </NavItem>
-            <NavItem eventKey={3} href="/apartments/new">
+            </NavItem>}
+            {this.auth.loggedIn() && <NavItem eventKey={3} href="/apartments/new">
               Add Apartment
-            </NavItem>
+            </NavItem>}
             {!this.auth.loggedIn() && <NavItem eventKey={4} href="/login">Login</NavItem>}
             {this.auth.loggedIn() && <NavItem onClick={this.handleClick} eventKey={5} href="/login">
               Logout

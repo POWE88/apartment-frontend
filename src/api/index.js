@@ -47,6 +47,10 @@ let deleteApartment = function(apartment) {
     })
 }
 
+let editApartment = function(id) {
+  return fetch(BASE = `/apartments/${id}`)
+}
+
 export {
   getApartments, getApartment, createApartment, deleteApartment
 }
