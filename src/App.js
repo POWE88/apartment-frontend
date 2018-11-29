@@ -10,34 +10,53 @@ import ShowApartment from './pages/ShowApartment'
 import Login from './pages/Login'
 
 class App extends Component {
+  constructor(props){
+    super(props)
+
+    this.state = {
+      loggedin: false
+    }
+  }
 	render() {
 		// creates new instance of AuthService class
 		let auth = new AuthService()
 		return (
 			<div>
-				<Header />
+				<Header logout={this.checkLoginStatus}/>
 				<Router>
 					{(auth.loggedIn())
+
+
 					// if logged in
 					? <Switch>
 						<Route path="/login" component={Login} />
+            <Route path="/apartments/new" component={NewApartment}/>
             <Route path="/apartments" component={Apartments} />
-						<Route path="/newapartment" component={NewApartment}/>
             <Route path="/showapartment" component={ShowApartment}/>
 						<Route path="/register" component={Register} />
+            <Route path="/" component={Apartments} />
 					</Switch>
 					// if not logged in (ie Guest User)
 					: <Switch>
 						<Route path="/login" component={Login} />
+            <Redirect from="/apartments/new" to="/register" />
 						<Route path="/apartments" component={Apartments} />
-						<Redirect from="/newapartment" to="/register" />
             <Route path="/showapartment" component={ShowApartment}/>
 						<Route path="/register" component={Register} />
+            <Route path="/" component={Apartments} />
 					</Switch>}
 				</Router>
 			</div>
 		);
 	}
+
+  checkLoginStatus = () => {
+    this.setState({
+      loggedin: this.auth.loggedIn()
+    })
+  }
+
+
 }
 
 export default App;

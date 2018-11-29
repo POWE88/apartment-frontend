@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import AuthService from '../services'
+import {Redirect} from 'react-router-dom'
 
 class Login extends Component {
   constructor(props){
     super(props)
     this.auth = new AuthService()
     this.state = {
-      registerSuccess: false,
+      loginSuccess: false,
       form: {
         user: {
           email: "",
@@ -36,6 +37,7 @@ class Login extends Component {
               />
               <button onSubmit={this.onSubmit}>Login</button>
               </form>
+              {this.state.loginSuccess && <Redirect to="/" />}
             </div>
           </div>
       )
@@ -61,7 +63,7 @@ class Login extends Component {
         })
       }
       this.setState({
-        registerSuccess: true
+        loginSuccess: true
       })
     })
   }

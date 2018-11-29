@@ -12,27 +12,37 @@ class Header extends Component {
       return(
 
         <Navbar>
-  <Navbar.Header>
-    <Navbar.Brand>
-      <a href="#home">That Damn Apartment</a>
-    </Navbar.Brand>
-  </Navbar.Header>
-  <Nav>
-    <NavItem eventKey={1} href="#">
-      Link
-    </NavItem>
-    <NavItem eventKey={2} href="#">
-      <button onClick={this.handleClick}>Logout</button>
-    </NavItem>
-  </Nav>
-</Navbar>
+          <Navbar.Header>
+            <Navbar.Brand>
+              <a href="/">That Damn Apartment</a>
+            </Navbar.Brand>
+          </Navbar.Header>
+          <Nav>
+            <NavItem eventKey={1} href="/">
+              Home
+            </NavItem>
+            <NavItem eventKey={2} href="/register">
+              Register
+            </NavItem>
+            <NavItem eventKey={3} href="/apartments/new">
+              Add Apartment
+            </NavItem>
+            {!this.auth.loggedIn() && <NavItem eventKey={4} href="/login">Login</NavItem>}
+            <NavItem onClick={this.handleClick} eventKey={5} href="/login">
+              Logout
+            </NavItem>
+
+          </Nav>
+        </Navbar>
 
       )
     }
 
-    handleClick = (e) => {
-      e.preventDefault();
+
+    handleClick = () => {
       this.auth.logout();
+      this.props.logout();
+
     }
 }
 

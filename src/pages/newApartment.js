@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import { Form, FormGroup, Col, ControlLabel, FormControl, Button } from 'react-bootstrap'
 import { Redirect, Link } from 'react-router-dom';
+import { createApartment } from '../api/index'
 
 class NewApartment extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      newApartmentSuccess: false,
       form: {
         street: '',
         city: '',
@@ -28,16 +30,31 @@ class NewApartment extends Component {
       })
     }
 
-  sendData(e) {
-    e.preventDefault()
-    let newApartment = this.state.form;
-    this.props.submit(newApartment)
-  }
+    // handleSubmit(e){
+    //   e.preventDefault()
+    //   console.log(e.target.value);
+    //   this.setState({form: e.target.value})
+    //
+    // }
+
+    handleNewApartment(e){
+      let { form } = this.state
+      e.preventDefault()
+      createApartment(form)
+      .then(json => {
+        console.log(json)
+        this.setState({newApartmentSuccess: true})
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    }
+
 
     render() {
         return (
           <div className="newApartment">
-      <Form horizontal  onSubmit={this.sendData.bind(this)} >
+      <Form horizontal  onSubmit={this.handleNewApartment.bind(this)} >
         <FormGroup controlId="formHorizontalEmail">
           <Col componentClass={ControlLabel} sm={2} id="street">
             Street
@@ -110,10 +127,12 @@ class NewApartment extends Component {
           </Col>
         </FormGroup>
         </Form>
-        {this.props.success && <Redirect to="/cats"/>}
+        {this.props.success && <Redirect to="/apartments"/>}
     </div>
         )
     }
+
+
 }
 
 export default NewApartment
