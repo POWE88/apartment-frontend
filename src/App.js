@@ -8,6 +8,7 @@ import NewApartment from './pages/NewApartment'
 import Apartments from './pages/Apartments'
 import ShowApartment from './pages/ShowApartment'
 import Login from './pages/Login'
+import EditApartment from './pages/EditApartment'
 
 class App extends Component {
   constructor(props){
@@ -31,6 +32,7 @@ class App extends Component {
 					// if logged in
 					? <Switch>
 						<Route path="/login" render={(props) => <Login checkLogin={this.checkLoginStatus}/>} />
+            <Route path="/apartments/edit/:id" component={EditApartment}/>
             <Route path="/apartments/:id" component={ShowApartment}/>
             <Route path="/apartments/new" component={NewApartment}/>
             <Route path="/apartments" component={Apartments} />
@@ -40,6 +42,7 @@ class App extends Component {
 					// if not logged in (ie Guest User)
 					: <Switch>
 						<Route path="/login" render={(props) => <Login checkLogin={this.checkLoginStatus}/>} />
+            <Redirect from="/apartments/edit/:id" to="/apartments"/>
             <Route path="/apartments/:id" component={ShowApartment}/>
             <Redirect from="/apartments/new" to="/register" />
 						<Route path="/apartments" component={Apartments} />

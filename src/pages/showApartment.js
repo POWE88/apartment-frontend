@@ -24,49 +24,31 @@ class ShowApartment extends Component {
                City: {this.state.apartment.city}
               <br/>
               State: {this.state.apartment.state}
+              <br/>
+              Zipcode: {this.state.apartment.zipcode}
+              <br/>
+              Country: {this.state.apartment.country}
+              <br/>
+              Manager Name: {this.state.apartment.managername}
+              <br/>
+              Managers Phone: {this.state.apartment.managerphone}
+              <br/>
+              Managers Hours: {this.state.apartment.managerhours}
             </Panel.Body>
           </Panel>
-          <Button type="submit" className="Panel" onSubmit="">
-            Edit Grumps
-          </Button>
-          <br/>
-          <Button type="submit" className="Panel" onSubmit="">
-            Goodbye Grumps
-          </Button>
+
+          <form action={`/apartments/edit/${this.props.match.params.id}`}>
+            <input type="submit" value="Edit Apartment" />
+          </form>
+          <form action={"/apartments"}>
+            <input type="submit" value="delete Apartment" />
+          </form>
         </div>
       )
     }else {
       return(
         <div>
         Loading...
-        Loading...
-        Loading...
-        Loading...
-        Loading...
-        v
-        Loading...
-        Loading...
-        Loading...
-        Loading...
-        Loading...
-        v
-        v
-        Loading...
-        v
-        Loading...
-        Loading...
-        Loading...
-        v
-        v
-        v
-        v
-        v
-        vLoading...
-        Loading...
-        Loading...
-        Loading...
-        v
-        vLoading...
         </div>
       )
     }
