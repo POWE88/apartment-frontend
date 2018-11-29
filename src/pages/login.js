@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import AuthService from '../services'
-import {Redirect} from 'react-router-dom'
+import {Redirect} from 'react-router'
 
 class Login extends Component {
   constructor(props){
@@ -53,7 +53,6 @@ class Login extends Component {
 
   onSubmit = (e) => {
     e.preventDefault()
-
     this.auth.login(this.state.form)
     .then(json => {
       console.log("Got to second then:", json)
@@ -61,10 +60,12 @@ class Login extends Component {
         this.setState({
           errors: json.errors
         })
+      }else{
+        this.props.checkLogin()
+        this.setState({
+          loginSuccess: true
+        })
       }
-      this.setState({
-        loginSuccess: true
-      })
     })
   }
 }

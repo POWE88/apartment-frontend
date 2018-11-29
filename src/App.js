@@ -13,23 +13,24 @@ class App extends Component {
   constructor(props){
     super(props)
 
+    this.auth = new AuthService()
     this.state = {
       loggedin: false
     }
   }
 	render() {
 		// creates new instance of AuthService class
-		let auth = new AuthService()
+
 		return (
 			<div>
 				<Header logout={this.checkLoginStatus}/>
 				<Router>
-					{(auth.loggedIn())
+					{(this.auth.loggedIn())
 
 
 					// if logged in
 					? <Switch>
-						<Route path="/login" component={Login} />
+						<Route path="/login" render={(props) => <Login checkLogin={this.checkLoginStatus}/>} />
             <Route path="/apartments/new" component={NewApartment}/>
             <Route path="/apartments" component={Apartments} />
             <Route path="/showapartment" component={ShowApartment}/>
@@ -38,7 +39,7 @@ class App extends Component {
 					</Switch>
 					// if not logged in (ie Guest User)
 					: <Switch>
-						<Route path="/login" component={Login} />
+						<Route path="/login" render={(props) => <Login checkLogin={this.checkLoginStatus}/>} />
             <Redirect from="/apartments/new" to="/register" />
 						<Route path="/apartments" component={Apartments} />
             <Route path="/showapartment" component={ShowApartment}/>

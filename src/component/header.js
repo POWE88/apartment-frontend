@@ -28,9 +28,9 @@ class Header extends Component {
               Add Apartment
             </NavItem>
             {!this.auth.loggedIn() && <NavItem eventKey={4} href="/login">Login</NavItem>}
-            <NavItem onClick={this.handleClick} eventKey={5} href="/login">
+            {this.auth.loggedIn() && <NavItem onClick={this.handleClick} eventKey={5} href="/login">
               Logout
-            </NavItem>
+            </NavItem>}
 
           </Nav>
         </Navbar>
