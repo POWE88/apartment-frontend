@@ -47,8 +47,18 @@ let deleteApartment = function(apartment) {
     })
 }
 
-let editApartment = function(id) {
-  return fetch(BASE = `/apartments/${id}`)
+let editApartment = function(apartment) {
+  return fetch(BASE = `/apartments/${apartment.id}`, {
+    body: JSON.stringify(apartment),
+    headers: {
+      'Content-Type' : 'application/json'
+    },
+    method: "PATCH"
+  })
+    .then((resp) => {
+      let json =resp.json()
+      return json
+    })
 }
 
 export {

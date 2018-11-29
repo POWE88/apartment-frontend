@@ -30,13 +30,6 @@ class EditApartment extends Component {
       })
     }
 
-    // handleSubmit(e){
-    //   e.preventDefault()
-    //   console.log(e.target.value);
-    //   this.setState({form: e.target.value})
-    //
-    // }
-
     handleNewApartment(e){
       let { form } = this.state
       e.preventDefault()
