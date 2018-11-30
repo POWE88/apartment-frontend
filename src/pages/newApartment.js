@@ -2,10 +2,12 @@ import React, { Component } from 'react'
 import { Form, FormGroup, Col, ControlLabel, FormControl, Button } from 'react-bootstrap'
 import { Redirect, Link } from 'react-router-dom';
 import { createApartment } from '../api/index'
+import AuthService from '../services'
 
 class NewApartment extends Component {
   constructor(props) {
     super(props)
+    this.auth = new AuthService()
     this.state = {
       newApartmentSuccess: false,
       form: {
@@ -16,7 +18,8 @@ class NewApartment extends Component {
         country: '',
         managername: '',
         managerphone: '',
-        managerhours: ''
+        managerhours: '',
+        user_id: this.auth.getUserId()
       }
     }
   }

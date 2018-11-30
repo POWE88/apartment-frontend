@@ -31,6 +31,9 @@ class Header extends Component {
             {this.auth.loggedIn() && <NavItem onClick={this.handleClick} eventKey={5} href="/login">
               Logout
             </NavItem>}
+            {this.auth.loggedIn() && <NavItem eventKey={5} href='/user/apartments'>
+              my Apartments
+            </NavItem>}
 
           </Nav>
         </Navbar>

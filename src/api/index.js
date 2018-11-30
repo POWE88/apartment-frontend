@@ -18,6 +18,15 @@ let getApartment = function(id) {
     })
 }
 
+let getUserApartments = function(user_id){
+  return fetch(BASE + `/user/apartments/${user_id}`)
+  .then((resp) => {
+    let json = resp.json()
+    console.log(json);
+    return json
+  })
+}
+
 let createApartment = function(apartment) {
   console.log(apartment)
   return fetch(BASE + '/apartments', {
@@ -48,7 +57,9 @@ let deleteApartment = function(apartment) {
 }
 
 let editApartment = function(apartment) {
-  return fetch(BASE = `/apartments/${apartment.id}`, {
+  console.log(apartment)
+  let id = apartment.id
+  return fetch(BASE + "/apartments/"+id, {
     body: JSON.stringify(apartment),
     headers: {
       'Content-Type' : 'application/json'
@@ -62,5 +73,5 @@ let editApartment = function(apartment) {
 }
 
 export {
-  getApartments, getApartment, createApartment, deleteApartment
+  getApartments, getApartment, createApartment, deleteApartment, editApartment, getUserApartments
 }

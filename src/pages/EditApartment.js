@@ -1,23 +1,15 @@
 import React, { Component } from 'react'
 import { Form, FormGroup, Col, ControlLabel, FormControl, Button } from 'react-bootstrap'
 import { Redirect, Link } from 'react-router-dom';
-import { createApartment } from '../api/index'
+import { editApartment, getApartment } from '../api/index'
 
 class EditApartment extends Component {
   constructor(props) {
     super(props)
     this.state = {
       newApartmentSuccess: false,
-      form: {
-        street: '',
-        city: '',
-        zipcode: '',
-        state: '',
-        country: '',
-        managername: '',
-        managerphone: '',
-        managerhours: ''
-      }
+
+      form: undefined
     }
   }
 
@@ -30,10 +22,10 @@ class EditApartment extends Component {
       })
     }
 
-    handleNewApartment(e){
+    handleEditApartment(e){
       let { form } = this.state
       e.preventDefault()
-      createApartment(form)
+      editApartment(form)
       .then(json => {
         console.log(json)
         this.setState({newApartmentSuccess: true})
@@ -45,9 +37,10 @@ class EditApartment extends Component {
 
 
     render() {
+      if(this.state.form != undefined){
         return (
           <div className="newApartment">
-      <Form horizontal  onSubmit={this.handleNewApartment.bind(this)} >
+      <Form horizontal  onSubmit={this.handleEditApartment.bind(this)} >
         <FormGroup controlId="formHorizontalEmail">
           <Col componentClass={ControlLabel} sm={2} id="street">
             Street
@@ -123,6 +116,22 @@ class EditApartment extends Component {
         {this.props.success && <Redirect to="/apartments"/>}
     </div>
         )
+      }else{
+        return(
+          <div> loading... </div>
+        )
+      }
+    }
+
+    componentDidMount(){
+      const id = this.props.match.params.id
+      console.log(id)
+      getApartment(id)
+      .then((form)=> {
+        console.log(`componentdidmount ${form}`);
+        this.setState({form})
+      }
+    )
     }
 
 

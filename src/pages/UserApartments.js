@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import { Panel, Button } from 'react-bootstrap'
-import { getApartment } from '../api'
+import { getUserApartments } from '../api'
+import AuthService from '../services'
 
-class ShowApartment extends Component {
+class UserApartment extends Component {
   constructor(props){
     super(props)
-
+    this.auth = new AuthService()
     this.state = {
       apartment: undefined
     }
@@ -21,7 +22,7 @@ class ShowApartment extends Component {
               <Panel.Title className="header" componentClass="h3">{this.state.apartment.street}</Panel.Title>
             </Panel.Heading>
             <Panel.Body>
-               City: {this.state.apartment.city}
+               City: {this.state.apartment[0].city}
               <br/>
               State: {this.state.apartment.state}
               <br/>
@@ -37,6 +38,12 @@ class ShowApartment extends Component {
             </Panel.Body>
           </Panel>
 
+          <form action={`/apartments/edit/${this.props.match.params.id}`}>
+            <input type="submit" value="Edit Apartment" />
+          </form>
+          <form action={"/apartments"}>
+            <input type="submit" value="delete Apartment" />
+          </form>
         </div>
       )
     }else {
@@ -49,15 +56,15 @@ class ShowApartment extends Component {
   }
 
   componentDidMount(){
-    const id = this.props.match.params.id
+    const id = this.auth.getUserId()
     console.log(id)
-    getApartment(id)
+    getUserApartments(id)
     .then((apartment)=> {
-      console.log(`componentdidmount ${apartment}`);
+      console.log(apartment);
       this.setState({apartment})
     }
   )
   }
 }
 
-export default ShowApartment
+export default UserApartment

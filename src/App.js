@@ -9,6 +9,7 @@ import Apartments from './pages/Apartments'
 import ShowApartment from './pages/ShowApartment'
 import Login from './pages/Login'
 import EditApartment from './pages/EditApartment'
+import UserApartments from './pages/UserApartments'
 
 class App extends Component {
   constructor(props){
@@ -32,9 +33,10 @@ class App extends Component {
 					// if logged in
 					? <Switch>
 						<Route path="/login" render={(props) => <Login checkLogin={this.checkLoginStatus}/>} />
-            <Route path="/apartments/edit/:id" component={EditApartment}/>
-            <Route path="/apartments/:id" component={ShowApartment}/>
-            <Route path="/apartments/new" component={NewApartment}/>
+            <Route exact path="/user/apartments" component={UserApartments}/>
+            <Route exact path="/apartments/new" component={NewApartment}/>
+            <Route exact path="/apartments/edit/:id" component={EditApartment}/>
+            <Route exact path="/apartments/:id" component={ShowApartment}/>
             <Route path="/apartments" component={Apartments} />
 						<Route path="/register" component={Register} />
             <Route path="/" component={Apartments} />
@@ -42,9 +44,9 @@ class App extends Component {
 					// if not logged in (ie Guest User)
 					: <Switch>
 						<Route path="/login" render={(props) => <Login checkLogin={this.checkLoginStatus}/>} />
-            <Redirect from="/apartments/edit/:id" to="/apartments"/>
-            <Route path="/apartments/:id" component={ShowApartment}/>
-            <Redirect from="/apartments/new" to="/register" />
+            <Redirect exact from="/apartments/new" to="/register" />
+            <Redirect exact from="/apartments/edit/:id" to="/apartments"/>
+            <Route exact path="/apartments/:id" component={ShowApartment}/>
 						<Route path="/apartments" component={Apartments} />
 						<Route path="/register" component={Register} />
             <Route path="/" component={Apartments} />
