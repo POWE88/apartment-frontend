@@ -24,20 +24,18 @@ class Header extends Component {
             {!this.auth.loggedIn() && <NavItem eventKey={2} href="/register">
               Register
             </NavItem>}
-            {this.auth.loggedIn() && <NavItem eventKey={3} href="/apartments/new">
+            {this.auth.loggedIn() && <NavItem eventKey={3} href='/user/apartments'>
+              my Apartments
+            </NavItem>}
+            {this.auth.loggedIn() && <NavItem eventKey={4} href="/apartments/new">
               Add Apartment
             </NavItem>}
-            {!this.auth.loggedIn() && <NavItem eventKey={4} href="/login">Login</NavItem>}
+            {!this.auth.loggedIn() && <NavItem eventKey={5} href="/login">Login</NavItem>}
             {this.auth.loggedIn() && <NavItem onClick={this.handleClick} eventKey={5} href="/login">
               Logout
             </NavItem>}
-            {this.auth.loggedIn() && <NavItem eventKey={5} href='/user/apartments'>
-              my Apartments
-            </NavItem>}
-
           </Nav>
         </Navbar>
-
       )
     }
 

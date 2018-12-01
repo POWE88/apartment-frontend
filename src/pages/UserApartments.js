@@ -2,49 +2,75 @@ import React, { Component } from 'react'
 import { Panel, Button } from 'react-bootstrap'
 import { getUserApartments } from '../api'
 import AuthService from '../services'
+import { Grid, Col, Row, ListGroup, ListGroupItem } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
+
+
 
 class UserApartment extends Component {
   constructor(props){
     super(props)
     this.auth = new AuthService()
     this.state = {
-      apartment: undefined
+      apartments: undefined
     }
   }
   render() {
     console.log(this.props)
 
-    if(this.state.apartment != undefined){
+    if(this.state.apartments != undefined){
       return (
-        <div className="pageContent">
-          <Panel bsStyle="primary" className="Panel">
-            <Panel.Heading>
-              <Panel.Title className="header" componentClass="h3">{this.state.apartment.street}</Panel.Title>
-            </Panel.Heading>
-            <Panel.Body>
-               City: {this.state.apartment[0].city}
-              <br/>
-              State: {this.state.apartment.state}
-              <br/>
-              Zipcode: {this.state.apartment.zipcode}
-              <br/>
-              Country: {this.state.apartment.country}
-              <br/>
-              Manager Name: {this.state.apartment.managername}
-              <br/>
-              Managers Phone: {this.state.apartment.managerphone}
-              <br/>
-              Managers Hours: {this.state.apartment.managerhours}
-            </Panel.Body>
-          </Panel>
+        <Grid>
+         <Row>
+           <Col xs={12}>
+               <ListGroup>
+               {console.log(this.props)}
+               {this.state.apartments.map((apartment, index) => {
+                 return (
+                   <ListGroupItem
+                     key={apartment.id}
+                     header={
+                       <Link to={`/apartments/${apartment.id}`}>
+                       <h4>
+                         <span className='apartment-street'>
+                           {apartment.street}
+                         </span> - <small className='apartment-city'> {apartment.city} </small>
+                         <small className='apartment-city'> {apartment.state} </small>
+                         <small className='apartment-city'> {apartment.zipcode} </small>
+                         <small className='apartment-city'> {apartment.country} </small>
+                       </h4>
+                       </Link>
+                     }>
 
-          <form action={`/apartments/edit/${this.props.match.params.id}`}>
-            <input type="submit" value="Edit Apartment" />
-          </form>
-          <form action={"/apartments"}>
-            <input type="submit" value="delete Apartment" />
-          </form>
-        </div>
+                   <span className='apartment-city'>
+                     Manger: {apartment.managername}
+                   </span>
+                   <br/>
+                   <span className='apartment-city'>
+                     Phone: {apartment.managerphone}
+                   </span>
+                   <br/>
+                   <span className='apartment-city'>
+                     Hours: {apartment.managerhours}
+                   </span>
+                   <form action={`/apartments/edit/${apartment.id}`}>
+                        <input type="submit" value="Edit Apartment" />
+                      </form>
+                      <form action={"/apartments"}>
+                        <input type="submit" value="Delete Apartment" />
+                      </form>
+
+                 </ListGroupItem>
+               )
+             })}
+           </ListGroup>
+
+         </Col>
+
+       </Row>
+
+      </Grid>
+
       )
     }else {
       return(
@@ -55,15 +81,16 @@ class UserApartment extends Component {
     }
   }
 
+
   componentDidMount(){
     const id = this.auth.getUserId()
     console.log(id)
     getUserApartments(id)
-    .then((apartment)=> {
-      console.log(apartment);
-      this.setState({apartment})
+    .then((apartments)=> {
+      console.log(apartments);
+      this.setState({apartments})
     }
-  )
+    )
   }
 }
 

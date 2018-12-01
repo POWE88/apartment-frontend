@@ -33,15 +33,10 @@ class NewApartment extends Component {
       })
     }
 
-    // handleSubmit(e){
-    //   e.preventDefault()
-    //   console.log(e.target.value);
-    //   this.setState({form: e.target.value})
-    //
-    // }
 
     handleNewApartment(e){
       let { form } = this.state
+      console.log(form);
       e.preventDefault()
       createApartment(form)
       .then(json => {
@@ -55,6 +50,7 @@ class NewApartment extends Component {
 
 
     render() {
+      console.log(this.state)
         return (
           <div className="newApartment">
       <Form horizontal  onSubmit={this.handleNewApartment.bind(this)} >

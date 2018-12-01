@@ -18,7 +18,7 @@ class Apartments extends Component {
              <Col xs={12}>
                  <ListGroup>
                  {console.log(this.props)}
-                 {this.state.apartments.map((apartment, index) =>{
+                 {this.state.apartments.map((apartment, index) => {
                    return (
                      <ListGroupItem
                        key={apartment.id}
